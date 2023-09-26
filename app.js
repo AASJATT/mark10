@@ -4,7 +4,11 @@ var cashGiven = document.querySelector("#cash-given");
 
 var checkButton = document.querySelector("#check-button");
 
-var message = document.querySelector("#error-message")
+var message = document.querySelector("#error-message");
+
+var noOfNotes = document.querySelectorAll(".no-of-notes");
+
+var availableNotes = [2000,500,100,20,10,5,1];
 
 checkButton.addEventListener("click", function validateBillAndCashAmount () {
     hideMessage();
@@ -24,6 +28,17 @@ checkButton.addEventListener("click", function validateBillAndCashAmount () {
         }
     }
 );
+
+function calculateChange(amountToBeReturned){
+    for(i=0;i<availableNotes.length;i++){
+        var numberOfNotes = Math.trunc(
+            amountToBeReturned/availableNotes[i]
+        );
+        amountToBeReturned %= availableNotes[i];
+        noOfNotes[i].innerText = numberOfNotes;
+    }
+    
+}
 
 function hideMessage(){
     message.style.display = "none";
